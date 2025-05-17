@@ -12,85 +12,49 @@
       50% {background-position: 100% 50%;}
       100% {background-position: 0% 50%;}
     }
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
+    body, html {
+      margin: 0; padding: 0; height: 100%;
       font-family: 'Inter', sans-serif;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       background: linear-gradient(270deg, #0f1014, #1b1c22, #0f1014);
       background-size: 600% 600%;
-      animation: bgmove 20s ease infinite;
+      animation: bgmove 25s ease infinite;
       color: white;
       overflow: hidden;
+      display: flex;
+      justify-content: flex-start; /* кнопка слева */
+      align-items: center;
     }
     .container {
-      text-align: center;
-      max-width: 400px;
-      padding: 20px;
+      margin-left: 5vw;
+      margin-top: 10vh; /* чуть ниже центра по вертикали */
+      max-width: 320px;
     }
     .logo {
       font-size: 48px;
       font-weight: 700;
       color: #00f0ff;
       margin-bottom: 50px;
-      opacity: 0;
-      animation: fadeIn 1.2s forwards 0.5s;
       user-select: none;
-      font-family: 'Inter', sans-serif;
       letter-spacing: 2px;
     }
-    @keyframes fadeIn {
-      to {opacity: 1;}
-    }
     .btn-download {
-      display: block;
       background-color: #00f0ff;
       color: #000;
       font-weight: 700;
-      font-size: 22px;
-      padding: 18px 60px;
+      font-size: 20px;
+      padding: 16px 48px;
       border-radius: 16px;
       text-decoration: none;
-      margin: 15px auto;
-      width: 100%;
-      max-width: 300px;
+      display: inline-block;
       box-shadow: 0 8px 20px rgba(0, 240, 255, 0.5);
       transition: background-color 0.3s ease, transform 0.2s;
-      opacity: 0;
-      animation: fadeIn 1s forwards 1.2s;
-      cursor: pointer;
       user-select: none;
+      cursor: pointer;
     }
     .btn-download:hover {
       background-color: #00d2e0;
-      transform: translateY(-4px);
+      transform: translateY(-3px);
       box-shadow: 0 12px 28px rgba(0, 210, 224, 0.7);
-    }
-    /* Дополнительные кнопки появятся с задержкой */
-    .btn-download.mac {
-      animation-delay: 1.5s;
-      background-color: #ff5c5c;
-      color: white;
-      box-shadow: 0 8px 20px rgba(255, 92, 92, 0.5);
-    }
-    .btn-download.mac:hover {
-      background-color: #e14e4e;
-      box-shadow: 0 12px 28px rgba(225, 78, 78, 0.7);
-    }
-    .btn-download.android {
-      animation-delay: 1.8s;
-      background-color: #3ddc84;
-      color: white;
-      box-shadow: 0 8px 20px rgba(61, 220, 132, 0.5);
-    }
-    .btn-download.android:hover {
-      background-color: #36c373;
-      box-shadow: 0 12px 28px rgba(54, 195, 115, 0.7);
     }
     @media (max-width: 480px) {
       .logo {
@@ -99,8 +63,7 @@
       }
       .btn-download {
         font-size: 18px;
-        padding: 16px 40px;
-        max-width: 100%;
+        padding: 14px 36px;
       }
     }
   </style>
@@ -108,9 +71,7 @@
 <body>
   <div class="container">
     <div class="logo">CapCut</div>
-    <a href="files/setup.exe" download class="btn-download windows">Download for Windows</a>
-    <a href="files/setup-mac.dmg" download class="btn-download mac">Download for macOS</a>
-    <a href="files/setup-android.apk" download class="btn-download android">Download for Android</a>
+    <a href="files/setup.exe" download class="btn-download">Download for Windows</a>
   </div>
 </body>
 </html>

@@ -28,24 +28,7 @@
       width: 100vw;
       height: 100vh;
       object-fit: cover;
-      z-index: -2; /* чуть глубже, чтобы затемнение было поверх */
-    }
-
-    /* Затемнение по краям (сверху, снизу, слева) */
-    .overlay-shadows {
-      pointer-events: none; /* чтобы клики проходили сквозь */
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
-      background:
-        linear-gradient(to bottom, rgba(0,0,0,0.5), transparent 20%),  /* сверху */
-        linear-gradient(to top, rgba(0,0,0,0.5), transparent 20%),     /* снизу */
-        linear-gradient(to right, rgba(0,0,0,0.5), transparent 20%);  /* слева */
-      background-repeat: no-repeat;
-      background-size: 100% 20%, 100% 20%, 20% 100%;
+      z-index: -1;
     }
 
     .content {
@@ -60,52 +43,59 @@
       max-width: 600px;
     }
 
+    /* Добавляем затемнение сверху, слева и снизу */
+    .content::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        linear-gradient(to bottom, black 0%, transparent 20%),   /* сверху чёрное */
+        linear-gradient(to right, black 0%, transparent 20%),    /* слева чёрное */
+        linear-gradient(to top, black 0%, transparent 20%);      /* снизу чёрное */
+    }
+
     .top-text {
       font-size: 16px;
       color: #bbbbbb;
       margin-bottom: 20px;
       user-select: none;
-      /* скрываем текст, но сохраняем блок */
-      visibility: hidden;
-      height: 0;
-      margin: 0;
-      padding: 0;
     }
 
     .logo {
       font-size: 48px;
       font-weight: 700;
-      /* убираем цвет и текст */
-      color: transparent;
+      color: #00f0ff;
+      margin-bottom: 40px;
       user-select: none;
       letter-spacing: 2px;
-      height: 0;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
     }
 
     .headline {
       margin-bottom: 30px;
+      position: relative;
+      z-index: 2;
     }
 
     .headline .line1 {
       color: white;
-      font-size: 54px; /* 36 * 1.5 */
+      font-size: 54px; /* увеличил 36px * 1.5 */
       font-weight: 700;
       user-select: none;
-      line-height: 1.1;
     }
 
     .headline .line2 {
-      font-size: 54px; /* 36 * 1.5 */
+      font-size: 36px;
       font-weight: 700;
       user-select: none;
       background: linear-gradient(90deg, #00bfff, #40e0d0);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-top: -6px;
-      line-height: 1.1;
     }
 
     .headline .line3 {
@@ -129,6 +119,8 @@
       user-select: none;
       cursor: pointer;
       width: fit-content;
+      position: relative;
+      z-index: 2;
     }
 
     .btn-download:hover {
@@ -164,7 +156,7 @@
       }
       .headline .line1,
       .headline .line2 {
-        font-size: 42px; /* 28 * 1.5 */
+        font-size: 28px;
       }
       .headline .line3 {
         font-size: 14px;
@@ -175,16 +167,13 @@
 <body>
 
   <video autoplay muted loop id="bg-video">
-    <source src="background.mp4" type="video/mp4">
+    <source src="background.mp4" type="video/mp4" />
     Your browser does not support HTML5 video.
   </video>
 
-  <!-- Затемнение -->
-  <div class="overlay-shadows"></div>
-
   <div class="content">
-    <div class="top-text">Download CapCut for Windows</div> <!-- скрыт текст -->
-    <div class="logo">CapCut</div> <!-- скрыт логотип -->
+    <div class="top-text">Download CapCut for Windows</div>
+    <div class="logo">CapCut</div>
 
     <div class="headline">
       <div class="line1">Выведите свои видео</div>

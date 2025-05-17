@@ -7,6 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&display=swap" rel="stylesheet" />
   <link rel="icon" href="https://static.capcut.com/favicon.ico" type="image/x-icon" />
   <style>
+    /* 🔁 Анимация градиента (можно оставить, но не видно будет на фоне видео) */
     @keyframes bgmove {
       0% {background-position: 0% 50%;}
       50% {background-position: 100% 50%;}
@@ -18,14 +19,29 @@
       padding: 0;
       height: 100%;
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(270deg, #0f1014, #1b1c22, #0f1014);
-      background-size: 600% 600%;
-      animation: bgmove 25s ease infinite;
-      color: white;
+      overflow: hidden;
+    }
+
+    /* 🎥 Видео-фон */
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
+      padding-left: 5%;
+      color: white;
     }
 
     .top-text {
@@ -57,6 +73,7 @@
       transition: background-color 0.3s ease, transform 0.2s;
       user-select: none;
       cursor: pointer;
+      width: fit-content;
     }
 
     .btn-download:hover {
@@ -68,9 +85,12 @@
     .footer {
       position: absolute;
       bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
       font-size: 14px;
       color: #888;
       user-select: none;
+      z-index: 2;
     }
 
     @media (max-width: 480px) {
@@ -91,9 +111,21 @@
   </style>
 </head>
 <body>
-  <div class="top-text">Download CapCut for Windows</div>
-  <div class="logo">CapCut</div>
-  <a href="files/setup.exe" download class="btn-download">Download for Windows</a>
+
+  <!-- 🎥 Видео-фон -->
+  <video autoplay muted loop id="bg-video">
+    <source src="background.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+
+  <!-- 🌟 Контент поверх видео -->
+  <div class="content">
+    <div class="top-text">Download CapCut for Windows</div>
+    <div class="logo">CapCut</div>
+    <a href="files/setup.exe" download class="btn-download">Download for Windows</a>
+  </div>
+
   <div class="footer">© 2024 CapCut. All rights reserved.</div>
+
 </body>
 </html>

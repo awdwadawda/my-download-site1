@@ -15,8 +15,8 @@
 
   .top-nav {
     position: fixed;
-    top: 6px; /* чуть ниже */
-    left: 18px; /* чуть правее */
+    top: 6px;
+    left: 18px;
     height: 50px;
     display: flex;
     align-items: center;
@@ -68,9 +68,9 @@
     z-index: 2;
     pointer-events: none;
     background:
-      linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 25%),
-      linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 20%),
-      linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 20%),
+      linear-gradient(to right, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0) 25%),
+      linear-gradient(to bottom, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0) 20%),
+      linear-gradient(to top, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0) 20%),
       radial-gradient(ellipse at center, rgba(0,0,0,0) 60%, rgba(0,0,0,0) 100%);
   }
 
@@ -81,7 +81,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-left: 7%; /* сдвинуто влево */
+    padding-left: 7%;
     max-width: 600px;
     user-select: none;
   }
@@ -124,7 +124,7 @@
     cursor: pointer;
     width: fit-content;
     animation: pulse 2.5s infinite;
-    margin-left: 0; /* чтобы не сдвигалось отдельно */
+    margin-left: 0;
   }
 
   .btn-download:hover {
@@ -143,6 +143,54 @@
       box-shadow: 0 14px 30px rgba(0, 240, 255, 0.8);
       transform: translateY(-4px);
     }
+  }
+
+  /* Новый блок справа сверху */
+  .top-right {
+    position: fixed;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 101;
+    user-select: none;
+  }
+
+  .help-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: white;
+    color: black;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 36px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .btn-download-small {
+    background-color: #00f0ff;
+    color: black;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 12px 28px;
+    border-radius: 16px;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 0 8px 20px rgba(0, 240, 255, 0.5);
+    cursor: pointer;
+    animation: pulse 2.5s infinite;
+    white-space: nowrap;
+  }
+
+  .btn-download-small:hover {
+    background-color: #00d2e0;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(0, 210, 224, 0.7);
+    animation-play-state: paused;
   }
 
   @media (max-width: 480px) {
@@ -167,6 +215,16 @@
     }
     .nav-item.capcut {
       font-size: 20px;
+    }
+    .btn-download-small {
+      font-size: 14px;
+      padding: 10px 20px;
+    }
+    .help-circle {
+      width: 30px;
+      height: 30px;
+      font-size: 20px;
+      line-height: 30px;
     }
   }
 </style>
@@ -196,6 +254,11 @@
     </div>
 
     <a href="files/setup.exe" download class="btn-download">Скачать бесплатно</a>
+  </div>
+
+  <div class="top-right">
+    <div class="help-circle" title="Помощь">?</div>
+    <a href="files/setup.exe" download class="btn-download-small">Скачать</a>
   </div>
 
 </body>

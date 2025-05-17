@@ -2,107 +2,98 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CapCut Style</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CapCut Download</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="https://static.capcut.com/favicon.ico" type="image/x-icon" />
   <style>
-    body {
+    @keyframes bgmove {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    body, html {
       margin: 0;
-      height: 100vh;
-      background: #0f0f11;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
+      padding: 0;
+      height: 100%;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(270deg, #0f1014, #1b1c22, #0f1014);
+      background-size: 600% 600%;
+      animation: bgmove 25s ease infinite;
       color: white;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      position: relative;
+      align-items: center;
     }
 
-    #particles-js {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-    }
-
-    .content {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-    }
-
-    .capcut {
-      font-size: 48px;
-      font-weight: bold;
-      color: #00f5ff;
-      text-shadow: 0 0 10px #00f5ff, 0 0 20px #00f5ff;
-      animation: glow 2s infinite alternate;
-    }
-
-    @keyframes glow {
-      from {
-        text-shadow: 0 0 5px #00f5ff;
-      }
-      to {
-        text-shadow: 0 0 20px #00f5ff, 0 0 30px #00f5ff;
-      }
-    }
-
-    .button {
-      margin-top: 20px;
-      background-color: #00f5ff;
-      border: none;
-      padding: 15px 30px;
-      border-radius: 10px;
-      font-size: 18px;
-      font-weight: bold;
-      color: #000;
-      cursor: pointer;
-      box-shadow: 0 0 15px #00f5ff;
-      transition: transform 0.2s;
-    }
-
-    .button:hover {
-      transform: scale(1.05);
-    }
-
-    .subtitle {
-      margin-top: 10px;
+    .top-text {
       font-size: 16px;
-      color: #aaa;
+      color: #bbbbbb;
+      margin-bottom: 20px;
+      user-select: none;
+    }
+
+    .logo {
+      font-size: 48px;
+      font-weight: 700;
+      color: #00f0ff;
+      margin-bottom: 40px;
+      user-select: none;
+      letter-spacing: 2px;
+    }
+
+    .btn-download {
+      background-color: #00f0ff;
+      color: #000;
+      font-weight: 700;
+      font-size: 20px;
+      padding: 16px 48px;
+      border-radius: 16px;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 8px 20px rgba(0, 240, 255, 0.5);
+      transition: background-color 0.3s ease, transform 0.2s;
+      user-select: none;
+      cursor: pointer;
+    }
+
+    .btn-download:hover {
+      background-color: #00d2e0;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(0, 210, 224, 0.7);
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 14px;
+      color: #888;
+      user-select: none;
+    }
+
+    @media (max-width: 480px) {
+      .logo {
+        font-size: 36px;
+      }
+      .btn-download {
+        font-size: 18px;
+        padding: 14px 36px;
+      }
+      .top-text {
+        font-size: 14px;
+      }
+      .footer {
+        font-size: 12px;
+      }
     }
   </style>
 </head>
 <body>
-  <div id="particles-js"></div>
-  <div class="content">
-    <div class="subtitle">Download CapCut for Windows</div>
-    <div class="capcut">CapCut</div>
-    <button class="button">Download for Windows</button>
-  </div>
-
-  <!-- Подключение particles.js -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script>
-    particlesJS("particles-js", {
-      particles: {
-        number: { value: 50 },
-        size: { value: 3 },
-        color: { value: "#00f5ff" },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: "#00f5ff",
-          opacity: 0.4,
-          width: 1
-        },
-        move: {
-          enable: true,
-          speed: 2
-        }
-      }
-    });
-  </script>
+  <div class="top-text">Download CapCut for Windows</div>
+  <div class="logo">CapCut</div>
+  <a href="files/setup.exe" download class="btn-download">Download for Windows</a>
+  <div class="footer">© 2024 CapCut. All rights reserved.</div>
 </body>
 </html>

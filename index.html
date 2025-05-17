@@ -20,13 +20,12 @@
     .top-nav {
       position: fixed;
       top: 0;
-      left: 0;
-      width: 100%;
+      left: 12px; /* почти максимально влево */
+      width: auto;
       height: 50px;
       background: transparent;
       display: flex;
       align-items: center;
-      padding-left: 12%;
       gap: 40px;
       z-index: 3;
       user-select: none;
@@ -41,6 +40,7 @@
       display: flex;
       align-items: center;
       gap: 6px;
+      white-space: nowrap;
     }
 
     .top-nav .nav-item::after {
@@ -52,6 +52,12 @@
       margin-left: 2px;
     }
 
+    /* Увеличиваем CapCut */
+    .top-nav .nav-item.capcut {
+      font-size: 24px; /* в 1.5 раза больше 16px */
+      font-weight: 700;
+    }
+
     #bg-video {
       position: fixed;
       top: 0;
@@ -59,7 +65,23 @@
       width: 100vw;
       height: 100vh;
       object-fit: cover;
+      z-index: -2; /* видео под градиентом */
+    }
+
+    /* Градиенты затемнения только по краям, чтобы центр видео был четким */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
       z-index: -1;
+      background:
+        linear-gradient(to bottom, black 0%, transparent 60%),
+        linear-gradient(to top, black 0%, transparent 60%),
+        linear-gradient(to left, black 0%, transparent 75%),
+        linear-gradient(to right, black 0%, transparent 75%);
     }
 
     .content {
@@ -74,22 +96,6 @@
       max-width: 600px;
 
       opacity: 1; /* сразу видим */
-      /* убрал анимацию */
-    }
-
-    .content::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 0;
-      background:
-        linear-gradient(to bottom, black 0%, transparent 65%),
-        linear-gradient(to right, black 0%, transparent 75%),
-        linear-gradient(to top, black 0%, transparent 60%);
     }
 
     .headline {
@@ -148,7 +154,7 @@
       background-color: #00d2e0;
       transform: translateY(-3px);
       box-shadow: 0 12px 28px rgba(0, 210, 224, 0.7);
-      animation-play-state: paused; /* при наведении отключаем пульсацию */
+      animation-play-state: paused;
     }
 
     .footer {
@@ -200,9 +206,12 @@
         font-size: 14px;
       }
       .top-nav {
-        padding-left: 10px;
+        left: 8px;
         gap: 20px;
         font-size: 14px;
+      }
+      .top-nav .nav-item.capcut {
+        font-size: 20px;
       }
     }
   </style>
@@ -210,7 +219,7 @@
 <body>
 
   <div class="top-nav">
-    <div class="nav-item">CapCut</div>
+    <div class="nav-item capcut">CapCut</div>
     <div class="nav-item">Товары</div>
     <div class="nav-item">Решения</div>
     <div class="nav-item">Ресурсы</div>
@@ -221,6 +230,8 @@
     <source src="background.mp4" type="video/mp4" />
     Your browser does not support HTML5 video.
   </video>
+
+  <div class="overlay"></div>
 
   <div class="content">
     <div class="headline">

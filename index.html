@@ -7,12 +7,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&display=swap" rel="stylesheet" />
   <link rel="icon" href="https://static.capcut.com/favicon.ico" type="image/x-icon" />
   <style>
-    @keyframes bgmove {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
-    }
-
     body, html {
       margin: 0;
       padding: 0;
@@ -43,7 +37,7 @@
       max-width: 600px;
     }
 
-    /* Добавляем затемнение сверху, слева и снизу */
+    /* Затемнение увеличено в 3–4 раза */
     .content::before {
       content: "";
       position: fixed;
@@ -54,25 +48,9 @@
       pointer-events: none;
       z-index: 0;
       background:
-        linear-gradient(to bottom, black 0%, transparent 20%),   /* сверху чёрное */
-        linear-gradient(to right, black 0%, transparent 20%),    /* слева чёрное */
-        linear-gradient(to top, black 0%, transparent 20%);      /* снизу чёрное */
-    }
-
-    .top-text {
-      font-size: 16px;
-      color: #bbbbbb;
-      margin-bottom: 20px;
-      user-select: none;
-    }
-
-    .logo {
-      font-size: 48px;
-      font-weight: 700;
-      color: #00f0ff;
-      margin-bottom: 40px;
-      user-select: none;
-      letter-spacing: 2px;
+        linear-gradient(to bottom, black 0%, transparent 60%),   /* сверху */
+        linear-gradient(to right, black 0%, transparent 60%),    /* слева */
+        linear-gradient(to top, black 0%, transparent 60%);      /* снизу */
     }
 
     .headline {
@@ -83,7 +61,7 @@
 
     .headline .line1 {
       color: white;
-      font-size: 54px; /* увеличил 36px * 1.5 */
+      font-size: 54px;
       font-weight: 700;
       user-select: none;
     }
@@ -141,15 +119,9 @@
     }
 
     @media (max-width: 480px) {
-      .logo {
-        font-size: 36px;
-      }
       .btn-download {
         font-size: 18px;
         padding: 14px 36px;
-      }
-      .top-text {
-        font-size: 14px;
       }
       .footer {
         font-size: 12px;
@@ -172,9 +144,6 @@
   </video>
 
   <div class="content">
-    <div class="top-text">Download CapCut for Windows</div>
-    <div class="logo">CapCut</div>
-
     <div class="headline">
       <div class="line1">Выведите свои видео</div>
       <div class="line2">на новый уровень</div>

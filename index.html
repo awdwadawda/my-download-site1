@@ -1,94 +1,116 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CapCut Style Downloader</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <title>CapCut Download</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="https://static.capcut.com/favicon.ico" type="image/x-icon" />
   <style>
+    @keyframes bgmove {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
     * {
       box-sizing: border-box;
     }
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: #ffffff;
-      color: #111;
+      height: 100vh;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      padding: 60px 20px;
+      background: linear-gradient(270deg, #0f1014, #1b1c22, #0f1014);
+      background-size: 600% 600%;
+      animation: bgmove 20s ease infinite;
+      color: white;
+      overflow: hidden;
     }
-    header {
-      width: 100%;
-      max-width: 1200px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 60px;
+    .container {
+      text-align: center;
+      max-width: 400px;
+      padding: 20px;
     }
     .logo {
-      font-weight: 800;
-      font-size: 28px;
-      color: #0f56b3;
+      font-size: 48px;
+      font-weight: 700;
+      color: #00f0ff;
+      margin-bottom: 50px;
+      opacity: 0;
+      animation: fadeIn 1.2s forwards 0.5s;
+      user-select: none;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 2px;
     }
-    main {
-      text-align: center;
-      max-width: 600px;
-      width: 100%;
-    }
-    h1 {
-      font-size: 40px;
-      font-weight: 800;
-      margin-bottom: 20px;
-    }
-    p {
-      font-size: 20px;
-      color: #555;
-      margin-bottom: 40px;
+    @keyframes fadeIn {
+      to {opacity: 1;}
     }
     .btn-download {
-      background-color: #0f56b3;
-      color: #fff;
-      font-size: 20px;
-      font-weight: 600;
-      padding: 14px 40px;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
+      display: block;
+      background-color: #00f0ff;
+      color: #000;
+      font-weight: 700;
+      font-size: 22px;
+      padding: 18px 60px;
+      border-radius: 16px;
       text-decoration: none;
-      display: inline-block;
-      margin: 12px 0;
-      transition: background-color 0.3s ease;
+      margin: 15px auto;
+      width: 100%;
+      max-width: 300px;
+      box-shadow: 0 8px 20px rgba(0, 240, 255, 0.5);
+      transition: background-color 0.3s ease, transform 0.2s;
+      opacity: 0;
+      animation: fadeIn 1s forwards 1.2s;
+      cursor: pointer;
+      user-select: none;
     }
     .btn-download:hover {
-      background-color: #084ca3;
+      background-color: #00d2e0;
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0, 210, 224, 0.7);
     }
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 30px;
-      }
-      p {
-        font-size: 18px;
+    /* Дополнительные кнопки появятся с задержкой */
+    .btn-download.mac {
+      animation-delay: 1.5s;
+      background-color: #ff5c5c;
+      color: white;
+      box-shadow: 0 8px 20px rgba(255, 92, 92, 0.5);
+    }
+    .btn-download.mac:hover {
+      background-color: #e14e4e;
+      box-shadow: 0 12px 28px rgba(225, 78, 78, 0.7);
+    }
+    .btn-download.android {
+      animation-delay: 1.8s;
+      background-color: #3ddc84;
+      color: white;
+      box-shadow: 0 8px 20px rgba(61, 220, 132, 0.5);
+    }
+    .btn-download.android:hover {
+      background-color: #36c373;
+      box-shadow: 0 12px 28px rgba(54, 195, 115, 0.7);
+    }
+    @media (max-width: 480px) {
+      .logo {
+        font-size: 36px;
+        margin-bottom: 40px;
       }
       .btn-download {
         font-size: 18px;
-        padding: 12px 32px;
+        padding: 16px 40px;
+        max-width: 100%;
       }
     }
   </style>
 </head>
 <body>
-  <header>
+  <div class="container">
     <div class="logo">CapCut</div>
-  </header>
-  <main>
-    <h1>Загрузите нужные файлы</h1>
-    <p>Нажмите на любую кнопку ниже, чтобы скачать соответствующий файл.</p>
-
-    <a href="files/my-document.docx" download class="btn-download">Скачать Документ Word</a><br>
-    <a href="files/cv-nursultan.docx" download class="btn-download">Скачать Резюме Nursultan</a><br>
-    <a href="files/project.zip" download class="btn-download">Скачать Проект ZIP</a>
-  </main>
+    <a href="files/setup.exe" download class="btn-download windows">Download for Windows</a>
+    <a href="files/setup-mac.dmg" download class="btn-download mac">Download for macOS</a>
+    <a href="files/setup-android.apk" download class="btn-download android">Download for Android</a>
+  </div>
 </body>
 </html>

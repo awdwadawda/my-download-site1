@@ -2,49 +2,107 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CapCut Style Button</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CapCut Style</title>
   <style>
     body {
-      background: #0f0f11;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       margin: 0;
-    }
-
-    .download-button {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: #1a1a1a;
-      border: 1px solid #333;
-      padding: 14px 28px;
-      border-radius: 14px;
-      font-size: 16px;
+      height: 100vh;
+      background: #0f0f11;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
       color: white;
-      font-weight: 500;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .capcut {
+      font-size: 48px;
+      font-weight: bold;
+      color: #00f5ff;
+      text-shadow: 0 0 10px #00f5ff, 0 0 20px #00f5ff;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 5px #00f5ff;
+      }
+      to {
+        text-shadow: 0 0 20px #00f5ff, 0 0 30px #00f5ff;
+      }
+    }
+
+    .button {
+      margin-top: 20px;
+      background-color: #00f5ff;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #000;
       cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: 0 0 8px rgba(0, 245, 255, 0.2);
+      box-shadow: 0 0 15px #00f5ff;
+      transition: transform 0.2s;
     }
 
-    .download-button:hover {
-      background: #2a2a2a;
-      box-shadow: 0 0 12px rgba(0, 245, 255, 0.4);
+    .button:hover {
+      transform: scale(1.05);
     }
 
-    .windows-icon {
-      width: 20px;
-      height: 20px;
+    .subtitle {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
-  <button class="download-button">
-    <img class="windows-icon" src="https://upload.wikimedia.org/wikipedia/commons/4/48/Windows_logo_-_2021.svg" alt="Windows Logo">
-    Download for Windows
-  </button>
+  <div id="particles-js"></div>
+  <div class="content">
+    <div class="subtitle">Download CapCut for Windows</div>
+    <div class="capcut">CapCut</div>
+    <button class="button">Download for Windows</button>
+  </div>
+
+  <!-- Подключение particles.js -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 50 },
+        size: { value: 3 },
+        color: { value: "#00f5ff" },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#00f5ff",
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2
+        }
+      }
+    });
+  </script>
 </body>
 </html>

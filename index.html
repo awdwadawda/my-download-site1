@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -32,12 +32,12 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding-left: 5%;
+      padding-left: 12%; /* ближе к центру */
       color: white;
       max-width: 600px;
     }
 
-    /* Затемнение увеличено в 3–4 раза */
+    /* Усиленное затемнение сверху и слева */
     .content::before {
       content: "";
       position: fixed;
@@ -48,21 +48,22 @@
       pointer-events: none;
       z-index: 0;
       background:
-        linear-gradient(to bottom, black 0%, transparent 60%),   /* сверху */
-        linear-gradient(to right, black 0%, transparent 60%),    /* слева */
-        linear-gradient(to top, black 0%, transparent 60%);      /* снизу */
+        linear-gradient(to bottom, black 0%, transparent 75%),   /* сверху больше */
+        linear-gradient(to right, black 0%, transparent 75%),    /* слева больше */
+        linear-gradient(to top, black 0%, transparent 60%);      /* снизу стандарт */
     }
 
     .headline {
-      margin-bottom: 30px;
+      margin-bottom: 60px;
       position: relative;
       z-index: 2;
     }
 
     .headline .line1 {
       color: white;
-      font-size: 54px;
+      font-size: 108px; /* в 2 раза больше */
       font-weight: 700;
+      letter-spacing: 2px; /* больше отступ между буквами */
       user-select: none;
     }
 
@@ -73,17 +74,18 @@
       background: linear-gradient(90deg, #00bfff, #40e0d0);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-top: -6px;
+      margin-top: -12px;
     }
 
     .headline .line3 {
       color: #888888;
       font-size: 16px;
-      margin-top: 10px;
+      margin-top: 16px;
       user-select: none;
     }
 
     .btn-download {
+      margin-top: 50px; /* сместили кнопку ниже */
       background-color: #00f0ff;
       color: #000;
       font-weight: 700;
@@ -126,9 +128,11 @@
       .footer {
         font-size: 12px;
       }
-      .headline .line1,
+      .headline .line1 {
+        font-size: 48px;
+      }
       .headline .line2 {
-        font-size: 28px;
+        font-size: 24px;
       }
       .headline .line3 {
         font-size: 14px;

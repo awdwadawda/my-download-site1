@@ -1,220 +1,174 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CapCut Download</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="icon" href="https://static.capcut.com/favicon.ico" type="image/x-icon" />
-  <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: 'Inter', sans-serif;
-      overflow: hidden;
-      background: black;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CapCut Download</title>
+<style>
+  html, body {
+    margin: 0; padding: 0; height: 100%;
+    overflow: hidden;
+    background: black;
+    font-family: Arial, sans-serif;
+    color: white;
+  }
 
-    /* Навигация сверху */
-    .top-nav {
-      position: fixed;
-      top: 0;
-      left: 12px; /* почти максимально влево */
-      width: auto;
-      height: 50px;
-      background: transparent;
-      display: flex;
-      align-items: center;
-      gap: 40px;
-      z-index: 3;
-      user-select: none;
-      color: white;
-      font-weight: 600;
-      font-size: 16px;
-    }
+  /* Навигация сверху */
+  .top-nav {
+    position: fixed;
+    top: 0;
+    left: 12px; /* почти слева */
+    height: 50px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    z-index: 100;
+    user-select: none;
+    font-weight: 600;
+    font-size: 16px;
+  }
 
-    .top-nav .nav-item {
-      position: relative;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-    }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+    color: white;
+    position: relative;
+  }
 
-    .top-nav .nav-item::after {
-      content: "▼";
-      font-size: 10px;
-      line-height: 1;
-      color: white;
-      user-select: none;
-      margin-left: 2px;
-    }
+  .nav-item::after {
+    content: "▼";
+    font-size: 10px;
+    margin-left: 2px;
+    user-select: none;
+    color: white;
+  }
 
-    /* Увеличиваем CapCut */
-    .top-nav .nav-item.capcut {
-      font-size: 24px; /* в 1.5 раза больше 16px */
-      font-weight: 700;
-    }
+  .nav-item.capcut {
+    font-size: 24px; /* крупнее */
+    font-weight: 700;
+  }
 
-    #bg-video {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-      z-index: -2; /* видео под градиентом */
-    }
+  /* Видео на фоне */
+  #bg-video {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: 1;
+    filter: none;
+    opacity: 1;
+  }
 
-    /* Градиенты затемнения только по краям, чтобы центр видео был четким */
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: -1;
-      background:
-        linear-gradient(to bottom, black 0%, transparent 60%),
-        linear-gradient(to top, black 0%, transparent 60%),
-        linear-gradient(to left, black 0%, transparent 75%),
-        linear-gradient(to right, black 0%, transparent 75%);
-    }
+  /* Затемнение только по краям — прозрачный центр */
+  .overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: 2;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse at center, rgba(0,0,0,0) 60%, rgba(0,0,0,0.5) 100%);
+  }
 
-    .content {
-      position: relative;
-      z-index: 1;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-left: 12%;
-      color: white;
-      max-width: 600px;
+  /* Контент сверху */
+  .content {
+    position: relative;
+    z-index: 10;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 12%;
+    max-width: 600px;
+    user-select: none;
+  }
 
-      opacity: 1; /* сразу видим */
-    }
+  .headline {
+    margin-bottom: 60px;
+  }
 
-    .headline {
-      margin-bottom: 60px;
-      position: relative;
-      z-index: 2;
-    }
+  .headline .line1 {
+    font-size: 72px;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
 
-    .headline .line1 {
-      color: white;
-      font-size: 72px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      user-select: none;
-    }
+  .headline .line2 {
+    font-size: 36px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #00bfff, #40e0d0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: -12px;
+  }
 
-    .headline .line2 {
-      font-size: 36px;
-      font-weight: 700;
-      user-select: none;
-      background: linear-gradient(90deg, #00bfff, #40e0d0);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-top: -12px;
-    }
+  .headline .line3 {
+    font-size: 16px;
+    color: #ccc;
+    margin-top: 16px;
+  }
 
-    .headline .line3 {
-      color: #888888;
-      font-size: 16px;
-      margin-top: 16px;
-      user-select: none;
-    }
+  .btn-download {
+    background-color: #00f0ff;
+    color: black;
+    font-weight: 700;
+    font-size: 20px;
+    padding: 16px 48px;
+    border-radius: 16px;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 0 8px 20px rgba(0, 240, 255, 0.5);
+    cursor: pointer;
+    width: fit-content;
+    animation: pulse 2.5s infinite;
+  }
 
-    .btn-download {
-      margin-top: 50px;
-      background-color: #00f0ff;
-      color: #000;
-      font-weight: 700;
-      font-size: 20px;
-      padding: 16px 48px;
-      border-radius: 16px;
-      text-decoration: none;
-      display: inline-block;
+  .btn-download:hover {
+    background-color: #00d2e0;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(0, 210, 224, 0.7);
+    animation-play-state: paused;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
       box-shadow: 0 8px 20px rgba(0, 240, 255, 0.5);
-      transition: background-color 0.3s ease, transform 0.2s;
-      user-select: none;
-      cursor: pointer;
-      width: fit-content;
-      position: relative;
-      z-index: 2;
-
-      animation: pulse 2.5s infinite;
+      transform: translateY(0);
     }
-
-    .btn-download:hover {
-      background-color: #00d2e0;
-      transform: translateY(-3px);
-      box-shadow: 0 12px 28px rgba(0, 210, 224, 0.7);
-      animation-play-state: paused;
+    50% {
+      box-shadow: 0 14px 30px rgba(0, 240, 255, 0.8);
+      transform: translateY(-4px);
     }
+  }
 
-    .footer {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
+  @media (max-width: 480px) {
+    .btn-download {
+      font-size: 18px;
+      padding: 14px 36px;
+    }
+    .headline .line1 {
+      font-size: 48px;
+    }
+    .headline .line2 {
+      font-size: 24px;
+    }
+    .headline .line3 {
       font-size: 14px;
-      color: #888;
-      user-select: none;
-      z-index: 2;
-      opacity: 0;
-      animation: fadeIn 2s forwards;
-      animation-delay: 1s;
     }
-
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
+    .top-nav {
+      left: 8px;
+      gap: 20px;
+      font-size: 14px;
     }
-
-    @keyframes pulse {
-      0%, 100% {
-        box-shadow: 0 8px 20px rgba(0, 240, 255, 0.5);
-        transform: translateY(0);
-      }
-      50% {
-        box-shadow: 0 14px 30px rgba(0, 240, 255, 0.8);
-        transform: translateY(-4px);
-      }
+    .nav-item.capcut {
+      font-size: 20px;
     }
-
-    @media (max-width: 480px) {
-      .btn-download {
-        font-size: 18px;
-        padding: 14px 36px;
-      }
-      .footer {
-        font-size: 12px;
-      }
-      .headline .line1 {
-        font-size: 48px;
-      }
-      .headline .line2 {
-        font-size: 24px;
-      }
-      .headline .line3 {
-        font-size: 14px;
-      }
-      .top-nav {
-        left: 8px;
-        gap: 20px;
-        font-size: 14px;
-      }
-      .top-nav .nav-item.capcut {
-        font-size: 20px;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
 
@@ -226,9 +180,9 @@
     <div class="nav-item">Скачать</div>
   </div>
 
-  <video autoplay muted loop id="bg-video">
+  <video id="bg-video" autoplay muted loop playsinline>
     <source src="background.mp4" type="video/mp4" />
-    Your browser does not support HTML5 video.
+    Ваш браузер не поддерживает видео.
   </video>
 
   <div class="overlay"></div>
@@ -242,8 +196,6 @@
 
     <a href="files/setup.exe" download class="btn-download">Скачать бесплатно</a>
   </div>
-
-  <div class="footer">© 2024 CapCut. All rights reserved.</div>
 
 </body>
 </html>
